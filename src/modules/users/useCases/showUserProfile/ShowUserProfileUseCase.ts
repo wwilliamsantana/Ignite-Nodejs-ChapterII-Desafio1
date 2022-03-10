@@ -6,10 +6,16 @@ interface IRequest {
 }
 
 class ShowUserProfileUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) { } // vazio
 
   execute({ user_id }: IRequest): User {
-    // Complete aqui
+    const idExist = this.usersRepository.findById(user_id);
+
+    if (!idExist) {
+      throw new Error("Id not found");
+    }
+
+    return idExist;
   }
 }
 

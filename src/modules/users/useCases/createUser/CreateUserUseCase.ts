@@ -7,7 +7,7 @@ interface IRequest {
 }
 
 class CreateUserUseCase {
-  constructor(private usersRepository: IUsersRepository) { }
+  constructor(private usersRepository: IUsersRepository) { } // vazio
 
   execute({ email, name }: IRequest): User {
     const emailAlreadyExists = this.usersRepository.findByEmail(email);

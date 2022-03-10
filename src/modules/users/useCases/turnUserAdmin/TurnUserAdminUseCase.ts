@@ -6,7 +6,7 @@ interface IRequest {
 }
 
 class TurnUserAdminUseCase {
-  constructor(private usersRepository: IUsersRepository) { }
+  constructor(private usersRepository: IUsersRepository) { } // vazio
 
   execute({ user_id }: IRequest): User {
     const idExist = this.usersRepository.findById(user_id);
