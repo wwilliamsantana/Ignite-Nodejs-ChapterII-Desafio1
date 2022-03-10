@@ -6,10 +6,16 @@ interface IRequest {
 }
 
 class TurnUserAdminUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) { }
 
   execute({ user_id }: IRequest): User {
-    // Complete aqui
+    const idExist = this.usersRepository.findById(user_id);
+
+    if (!idExist) {
+      throw new Error("User id not exists! ");
+    }
+
+    return this.usersRepository.turnAdmin(idExist);
   }
 }
 
