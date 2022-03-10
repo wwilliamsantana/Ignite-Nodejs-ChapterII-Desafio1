@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Desafio I Concluído - Conceitos SOLID",
+    "description": "Desafio Concluído do Chapter II",
+    "version": "1.0.0",
+    "contact": {
+      "email": "euwilliamsantana@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Criar um novo usuário",
+        "requestBody": {
+          "description": "Campos Obrigatórios para criação do usúario",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "William",
+                  "email": "william@gamil.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Retorno do user criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email não existe!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "exmaple": "Email already exists!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Listar todos usuários",
+        "description": "Listar todos usuários se o usuário logado for admin",
+        "parameters": [
+          {
+            "in": "string($uuid)",
+            "name": "user_id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "c0a9192c-e91b-4824-adb9-c731fedace52"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-03-10T18:15:48.725Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-03-10T18:15:48.725Z"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "William"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "william@gmail.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Não possui permissão ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "exmaple": "Don't have permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retornar um usuário específico",
+        "description": "Retornar um usuário de acordo com id passado pelo request",
+        "parameters": [
+          {
+            "in": "(path)",
+            "description": "ID do usuário",
+            "name": "user_id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "c0a9192c-e91b-4824-adb9-c731fedace52"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-03-10T18:15:48.725Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-03-10T18:15:48.725Z"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": "false"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "William"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "william@gmail.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "example": "Don't have permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Torna admin um usuário",
+        "parameters": [
+          {
+            "in": "string($uuid)",
+            "description": "ID do usuário",
+            "name": "user_id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "c0a9192c-e91b-4824-adb9-c731fedace52"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-03-10T18:15:48.725Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-03-10T18:15:48.725Z"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": "false"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "William"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "william@gmail.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "example": "User not found!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
