@@ -26,6 +26,7 @@ Nesse desafio, você irá criar uma API seguindo a estrutura de arquitetura limp
 
 <ul>
   <li>JavaScript</li>
+  <li>TypeScript</li>
   <li>Node.js - Express</li>
 </ul>
 
