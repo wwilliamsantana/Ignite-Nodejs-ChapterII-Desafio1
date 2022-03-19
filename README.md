@@ -11,7 +11,7 @@
 ## :computer: Sobre  
 Nesse desafio, você irá criar uma API seguindo a estrutura de arquitetura limpa aprendida até agora. <br>
 
-<strong>Dando Início a arquitetura SOLID (arquitetura limpa).</strong> 
+<strong>Aplicando conceitos de arquitetura SOLID (arquitetura limpa).</strong> 
 <strong>S.O.L.I.D</strong>
 <ul>
   <li>S — Single Responsiblity Principle (Princípio da responsabilidade única)</li>
